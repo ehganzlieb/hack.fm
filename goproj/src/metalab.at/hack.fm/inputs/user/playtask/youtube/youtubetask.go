@@ -22,7 +22,8 @@ func NewYoutubeTask(videoId string) *YoutubeTask{
 
 func (tsk YoutubeTask) Exec(){
 	println("running yt")
-	dlink:= "https://youtu.be/"+tsk.videoId
+	//dlink:= "https://youtu.be/"+tsk.videoId
+	dlink:= tsk.videoId
 	println(dlink)
 	
 	//cmd:= exec.Command("util/youtube.sh", dlink)

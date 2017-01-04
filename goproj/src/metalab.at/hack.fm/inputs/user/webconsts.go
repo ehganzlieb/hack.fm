@@ -12,7 +12,7 @@ const html = `
 		<form method="POST">
 			<table>
 				<tr>
-					<td>Post a youtube ID</td>
+					<td>Post a youtube Link</td>
 					<td><input type="text" name="ytlink"/></td>
 					<td>
 						<input type="radio" name="ytmode" value="1"> Hybrid

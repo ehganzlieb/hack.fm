@@ -18,12 +18,11 @@ func main() {
 	
 	
 	//test code
-	
+	defer println("DONE-----------------------------")
 	ui:= uinput.NewUserInput()
 	
 	ui.PlugIn()
 	select{} //wait indefinitely
-	println("DONE-----------------------------")
 
 
 }
