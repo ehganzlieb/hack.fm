@@ -21,7 +21,7 @@ func NewYoutubeTask(videoId string) *YoutubeTask{
 
 
 func (tsk YoutubeTask) Exec(){
-	println("running yt")
+	fmt.Println("running yt")
 	//dlink:= "https://youtu.be/"+tsk.videoId
 	dlink:= tsk.videoId
 	println(dlink)
@@ -33,6 +33,6 @@ func (tsk YoutubeTask) Exec(){
 	//exec.Command("sh", "-c", "'youtube-dl -x --exec 'echo {}>fname' "+dlink+"'" ).Run()
 	//exec.Command("sh", "-c", "mpv \"`cat fname`\"").Run()
 	
-	println("finished yt");
+	fmt.Println("finished yt");
 	
 }

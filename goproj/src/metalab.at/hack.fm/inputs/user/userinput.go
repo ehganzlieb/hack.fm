@@ -3,10 +3,12 @@ package uinput
 import (
 	"container/list"
 	"container/ring"
+	"fmt"
 	"metalab.at/hack.fm/inputs/user/playtask"
+	"metalab.at/hack.fm/inputs/user/playtask/youtube"
+	"metalab.at/hack.fm/inputs/user/playtask/speech"
 	"net/http"
 	"time"
-	"metalab.at/hack.fm/inputs/user/playtask/youtube"
 )
 
 type UserInput struct {
@@ -58,7 +60,7 @@ func NewUserInput() *UserInput {
 	}
 
 	http.Handle("/", &ui)
-	go http.ListenAndServe(":1337",nil)
+	go http.ListenAndServe(":1337", nil)
 	return &ui
 }
 
@@ -168,15 +170,15 @@ func (ui *UserInput) AddTaskRevolver(task *playtask.Playtask) {
 func (ui *UserInput) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	defer resp.Write([]byte(html)) //get this out of the way
 
-	if req.PostFormValue("mediatype") == "yt" {
-		println("YT ID post")
+	switch req.PostFormValue("mediatype") {
+	case "yt":
+		fmt.Println("YT ID post")
 		switch req.PostFormValue("ytmode") {
 		case "1": //hybrid
 			if !(req.PostFormValue("ytlink") == "") {
 				tsk := playtask.Playtask(youtubetask.NewYoutubeTask(req.PostFormValue("ytlink")))
 				ui.AddTaskHybrid(&tsk)
 			}
-
 		case "2": //revolver
 			if !(req.PostFormValue("ytlink") == "") {
 				tsk := playtask.Playtask(youtubetask.NewYoutubeTask(req.PostFormValue("ytlink")))
@@ -188,5 +190,11 @@ func (ui *UserInput) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 				ui.AddTaskQueue(&tsk)
 			}
 		}
+	case "tts":
+		if(req.PostFormValue("ttstxt")!=""){
+			tsk:=playtask.Playtask((speechtask.NewSpeechTask(req.PostFormValue("ttstxt"))))
+			ui.AddTaskQueue(&tsk);
+		}
+		
 	}
 }
