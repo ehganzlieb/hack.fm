@@ -5,6 +5,7 @@ import (
 	"metalab.at/hack.fm/inputs/user"
 	//"metalab.at/hack.fm/inputs/user/playtask"
 	"time"
+	"metalab.at/hack.fm/inputs/cleanup"
 	//"os/exec"
 	//"fmt"
 	//"metalab.at/hack.fm/inputs/user/playtask/youtube"
@@ -22,6 +23,10 @@ func main() {
 	ui:= uinput.NewUserInput()
 	
 	ui.PlugIn()
+	
+	ci := cinput.NewCleanupInput(ui, 21,45)
+	ci.PlugIn()
+	
 	select{} //wait indefinitely
 
 

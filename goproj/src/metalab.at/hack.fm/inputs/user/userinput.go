@@ -99,7 +99,7 @@ func (ui *UserInput) plugIn() {
 	for !ui.killed { //terminate if killed
 
 		for ui.playing { //while playing basically this
-
+			time.Sleep(time.Second) //sleep for short pause
 			//empty all chans
 			chanEmtyFinished := false
 			for !chanEmtyFinished {
