@@ -24,7 +24,7 @@ func main() {
 	
 	ui.PlugIn()
 	
-	ci := cinput.NewCleanupInput(ui, 21,45)
+	ci := cinput.NewCleanupInput(ui, 21,45) //set time as needed
 	ci.PlugIn()
 	
 	select{} //wait indefinitely
