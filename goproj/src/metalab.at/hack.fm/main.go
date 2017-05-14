@@ -16,18 +16,19 @@ func main() {
 	//heartbeat pulseinput, keeps fm dongle alive
 	f := pulseinput.NewPulseInput(time.Second * 35)
 	f.PlugIn()
-	
-	
+
+
 	//test code
 	defer println("DONE-----------------------------")
 	ui:= uinput.NewUserInput()
-	
+
 	ui.PlugIn()
-	
+
 	ci := cinput.NewCleanupInput(ui, 21,45) //set time as needed
 	ci.PlugIn()
-	
-	select{} //wait indefinitely
+
+	select{}
+		 //wait indefinitely
 
 
 }

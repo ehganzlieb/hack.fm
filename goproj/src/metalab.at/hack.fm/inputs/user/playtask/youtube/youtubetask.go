@@ -27,9 +27,19 @@ func (tsk YoutubeTask) Exec(){
 	println(dlink)
 	
 	//cmd:= exec.Command("util/youtube.sh", dlink)
-	cmd:= exec.Command("youtube-dl", "-x", "--exec", "mpv {}", dlink)
-	fmt.Println(cmd)
-	cmd.Run()
+	
+	successful := false
+	tries:=10
+	for !successful && tries>0{
+		cmd:= exec.Command("youtube-dl", "-x", "--exec", "mpv {}", dlink)
+		fmt.Println(cmd)
+		playerr := cmd.Run()
+		if playerr==nil{
+			successful=true
+		} else{
+			tries--
+		}
+	}
 	//exec.Command("sh", "-c", "'youtube-dl -x --exec 'echo {}>fname' "+dlink+"'" ).Run()
 	//exec.Command("sh", "-c", "mpv \"`cat fname`\"").Run()
 	
